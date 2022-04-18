@@ -3,19 +3,12 @@ using System;
 public class BookNameGenerator<p>
 {
     p value;
-    int intValue;
+    string name;
 
-    public p NameCreation()
+    public string NameCreation()
     {
-        try
-        {
-            //bool resalt = string.TryParse(value, out intValue);
-        }
-        catch
-        {
-
-        }
-        return value;
+        name = $"{value}";
+        return name;
     }
 
 }

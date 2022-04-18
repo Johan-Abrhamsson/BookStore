@@ -10,11 +10,20 @@ public class Book
 
     public Book()
     {
-        RestRequest request = new RestRequest($"pokemon/{generator.Next(1, 899)}");
+        RestRequest request = new RestRequest($"pokemon/{generator.Next(0, 255)}");
         IRestResponse response = client.Get(request);
         string iventory = response.Content;
-        Console.WriteLine(iventory);
-        //this.name = $"{iventory} the {}";
+        int namePlace = iventory.IndexOf("\"species\":{\"name\":\"");
+        var i = 0;
+        while (true)
+        {
+            i++;
+            if (iventory[namePlace + 19 + i] == '\"')
+            {
+                break;
+            }
+        }
+        this.name = $"A book about {iventory.Substring(namePlace + 19, i)}";
     }
 
     public string Name()
