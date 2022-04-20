@@ -10,11 +10,14 @@ public class Book
 
     public Book()
     {
-        RestRequest request = new RestRequest($"pokemon/{generator.Next(0, 255)}");
+        //list to pokeapi and randomise a name
+        RestRequest request = new RestRequest($"pokemon/{generator.Next(0, 600)}");
         IRestResponse response = client.Get(request);
         string iventory = response.Content;
+        //section the name of the listed name
         int namePlace = iventory.IndexOf("\"species\":{\"name\":\"");
         var i = 0;
+        //add letters until a stop has been found
         while (true)
         {
             i++;
@@ -23,11 +26,13 @@ public class Book
                 break;
             }
         }
-        this.name = $"A book about {iventory.Substring(namePlace + 19, i)}";
+        //the name created
+        this.name = $"{iventory.Substring(namePlace + 19, i)}";
     }
 
     public string Name()
     {
+        //to get the name
         return name;
     }
 
